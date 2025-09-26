@@ -28,7 +28,7 @@
 
     //Arrays multidimensionales
     $personas = array(
-        array("nombre" => "Ana", "edad" => 33, "ciudad" => "Madrid"),
+        array("nombre" => "Ana", "edad" => 22, "ciudad" => "Madrid"),
         array("nombre" => "Javier", "edad" => 30, "ciudad" => "Barcelona"),
         array("nombre" => "Luis", "edad" => 35, "ciudad" => "Valencia")
     );
