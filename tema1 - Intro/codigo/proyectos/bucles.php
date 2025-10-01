@@ -28,9 +28,9 @@
 
     //Arrays multidimensionales
     $personas = array(
-        array("nombre" => "Ana", "edad" => 22, "ciudad" => "Madrid"),
-        array("nombre" => "Javier", "edad" => 30, "ciudad" => "Barcelona"),
-        array("nombre" => "Luis", "edad" => 35, "ciudad" => "Valencia")
+        array("nombre" => "Ana", "edad" => 25, "ciudad" => "Madrid"),
+        array("nombre" => "Luis", "edad" => 30, "ciudad" => "Barcelona"),
+        array("nombre" => "Pepe", "edad" => 35, "ciudad" => "Valencia")
     );
 
     foreach ($personas as $persona) {
