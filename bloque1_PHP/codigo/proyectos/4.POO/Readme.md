@@ -1,0 +1,1 @@
+## En esta sección tendremos ejercicios sobre POO con PHP y proyectos con todo lo visto hasta ahora
