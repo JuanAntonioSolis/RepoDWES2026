@@ -35,7 +35,7 @@ require("./cabecera.php");
                 foreach ($jugadores as $clave => $valor) {
                     echo '<div class="col">';
                     echo "<h4>" . $valor["nombre"];
-                    echo " -> " . $valor["nombre"] . "</h4>";
+                    echo " - " . $valor["vida"] . " pv</h4>";
                     echo "<img src='" . $valor["url"] . "' width='200'>";
                     echo "<ul class='list-group'>";
                     foreach ($valor["habilidades"] as $habilidad) {
