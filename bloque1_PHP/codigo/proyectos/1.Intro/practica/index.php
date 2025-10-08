@@ -46,7 +46,7 @@ require("./cabecera.php");
                 }
 
 
-                /*
+                /* //ESTILO MEJORADO CON BOOTSTRAP ---------------------------------------------
                 foreach ($jugadores as $clave => $valor) {
                     echo '<div class="col">';
 
