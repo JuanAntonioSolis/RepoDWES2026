@@ -12,3 +12,5 @@ RUN php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 # Install PDO MySQL extension 
 RUN docker-php-ext-install pdo pdo_mysql 
+
+RUN chown -R www-data:www-data /var/www/html/
