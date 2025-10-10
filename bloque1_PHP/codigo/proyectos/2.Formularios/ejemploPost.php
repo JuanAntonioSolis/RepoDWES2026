@@ -16,11 +16,70 @@
         <form action="ejemploRecogerPost.php" method="POST">
             <form>
                 <div class="row mb-3">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <label class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-6">
                         <input type="email" class="form-control" name="email">
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Edad</label>
+                    <div class="col-sm-6">
+                        <input type="number" class="form-control" name="edad" min="18" max="80">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Fecha de registro</label>
+                    <div class="col-sm-6">
+                        <input type="date" name="fecha">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Hora de registro</label>
+                    <div class="col-sm-6">
+                        <input type="time" name="hora">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Deporte</label>
+                    <div class="col-sm-6">
+                        <select name="deporte">
+                            <option value="ciclismo">Ciclismo</option>
+                            <option value="padel">Pádel</option>
+                            <option value="baloncesto">Baloncesto</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Notificaciones</label>
+                    <div class="col-sm-6">
+                        <select multiple name="notificaciones[]">
+                            <option value="email">Email</option>
+                            <option value="telefono">Teléfono</option>
+                            <option value="rrss">RRSS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Móvil</label>
+                    <div class="col-sm-6">
+                        <input type="radio" name="movil" value="android">Android <br>
+                        <input type="radio" name="movil" value="ios">IOS
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Países favoritos</label>
+                    <div class="col-sm-6">
+                        <input type="checkbox" name="paises[]" value="españa">España<br>
+                        <input type="checkbox" name="paises[]" value="italia">Italia<br>
+                        <input type="checkbox" name="paises[]" value="japon">Japón<br>
+                        <input type="checkbox" name="paises[]" value="holanda">Holanda<br>
+                    </div>
+                </div>
+
                 <div class="row mb-3">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-6">
@@ -28,7 +87,8 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <input type="submit" class="btn btn-primary" name="accion" value="Login">
+                <input type="submit" class="btn btn-primary" name="accion" value="Registro">
 
             </form>
 
