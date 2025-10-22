@@ -15,6 +15,11 @@ if (!isset($_SESSION['usuario']))
     <title>Incidencias</title>
 
     <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/fontawesome.css">
+    <link href="./assets/css/brands.css" rel="stylesheet" />
+    <link href="./assets/css/solid.css" rel="stylesheet" />
+    <link href="./assets/css/sharp-thin.css" rel="stylesheet" />
+    <link href="./assets/css/sharp-duotone-thin.css" rel="stylesheet" />
     <link rel="icon" href="./img/icono.png" sizes="32x32" type="image/png">
 </head>
 
@@ -48,7 +53,7 @@ if (!isset($_SESSION['usuario']))
                         echo "<td>" . $incidencia['dni'] . "</td>";
                         echo "<td>" . $incidencia['descr'] . "</td>";
                         echo "<td>";
-                        echo "<a href='controlador.php?accion=delIncidencia&posicion=" . $posicion . "'>X</a>";
+                        echo "<a class='btn btn-danger' href='controlador.php?accion=delIncidencia&posicion=" . $posicion . "'><i class='fa-solid fa-trash'></i></a>";
                         echo "</td>";
                         echo "</tr>";
                         $posicion++;
