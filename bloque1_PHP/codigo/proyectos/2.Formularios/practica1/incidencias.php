@@ -32,9 +32,14 @@ if (!isset($_SESSION['usuario']))
             <button type="button" class="btn btn-primary btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#nuevaIncidencia">
                 Nueva
             </button>
+
             <button type="button" class="btn btn-warning btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#eliminarIncidencias">
                 Eliminar todas
             </button>
+
+            <a class="btn btn-outline-secondary btn-sm mb-2" href="controlador.php?accion=generarInformeIncidencias">
+                Generar informe
+            </a>
 
             <table class="table table-striped">
                 <thead>

@@ -106,6 +106,12 @@ if (isset($_REQUEST['accion'])) {
             header("Location: verCliente.php?dni=" . $dniCliente . "&nombre=" . $nombre . "&email=" . $email);
 
             break;
+
+        //Generar informe de incidencias
+        case 'generarInformeIncidencias':
+            header("Location: informeIncidencias.php");
+            break;
+
         default:
             # code...
             break;
