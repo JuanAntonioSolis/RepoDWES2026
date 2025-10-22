@@ -31,10 +31,22 @@ if (isset($_REQUEST["nuevoCliente"])) {
     header("Location: clientes.php");
 }
 
+//Formulario de eliminar todos los clientes
+if (isset($_REQUEST["eliminarClientes"])) {
+    $_SESSION['clientes'] = array();
+    header("Location: clientes.php");
+}
+
 //Formulario de nueva incidencia
 if (isset($_REQUEST["nuevaIncidencia"])) {
     $incidencia = array("id" => $_REQUEST["id"], "dni" => $_REQUEST["dni"], "descr" => $_REQUEST["descr"]);
     array_push($_SESSION['incidencias'], $incidencia);
+    header("Location: incidencias.php");
+}
+
+//Formulario de eliminar todas las incidencias
+if (isset($_REQUEST["eliminarIncidencias"])) {
+    $_SESSION['incidencias'] = array();
     header("Location: incidencias.php");
 }
 
@@ -64,6 +76,35 @@ if (isset($_REQUEST['accion'])) {
             $_SESSION['incidencias'] = array_values($_SESSION['incidencias']); //Regenerar índices y no dejar huecos
 
             header("Location: incidencias.php");
+            break;
+        //Ver incidencia en detalle
+        case 'verIncidencia':
+            $idIncidencia = $_REQUEST['id'];
+            //Buscamos la incidencia por su ID en la sesión
+            foreach ($_SESSION['incidencias'] as $incidencia) {
+                if (strcmp($incidencia['id'], $idIncidencia) == 0) {
+                    $dni = $incidencia['dni'];
+                    $descr = $incidencia['descr'];
+                }
+            }
+
+            header("Location: verIncidencia.php?id=" . $idIncidencia . "&dni=" . $dni . "&descr=" . $descr);
+
+            break;
+
+        //Ver cliente en detalle
+        case 'verCliente':
+            $dniCliente = $_REQUEST['dni'];
+            //Buscamos el cliente por dni en la sesión
+            foreach ($_SESSION['clientes'] as $cliente) {
+                if (strcmp($cliente['dni'], $dniCliente) == 0) {
+                    $nombre = $cliente['nombre'];
+                    $email = $cliente['email'];
+                }
+            }
+
+            header("Location: verCliente.php?dni=" . $dniCliente . "&nombre=" . $nombre . "&email=" . $email);
+
             break;
         default:
             # code...
