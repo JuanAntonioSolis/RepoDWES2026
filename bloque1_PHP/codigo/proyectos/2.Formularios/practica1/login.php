@@ -1,38 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Javier Profe">
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DWES App - Login</title>
 
     <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/signin.css">
 
-    <link rel="icon" href="./img/icono.png" sizes="32x32" type="image/png">
 </head>
 
-<body class="d-flex align-items-center py-4 bg-body-tertiary">
-
-    <main class="form-signin w-100 m-auto">
+<body>
+    <div class="container mt-5 px-5">
         <form action="controlador.php" method="POST">
-            <img class="mb-4" src="./img/icono.png" alt="" width="72" height="57">
-            <h1 class="h3 mb-3 fw-normal">Login</h1>
-            <div class="form-floating">
-                <input type="email" class="form-control" name="email" placeholder="name@example.com">
-                <label for="floatingInput">Email</label>
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">¡Bienvenido!</h1>
             </div>
-            <div class="form-floating">
-                <input type="password" class="form-control" name="password" placeholder="Password">
-                <label for="floatingPassword">Password</label>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="correo">
+            </div>
+            
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="contra">
             </div>
 
-            <input class="btn btn-primary w-100 py-2" type="submit" name="login" value="Login">
-            <p class="mt-5 mb-3 text-body-secondary">&copy; 2025–2026</p>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" name="login">Login</button>
+            </div>
         </form>
-    </main>
+    </div>
+
+
+
 
     <script src="./js/bootstrap.min.js"></script>
 

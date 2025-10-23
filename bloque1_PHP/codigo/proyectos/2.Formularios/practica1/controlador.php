@@ -1,119 +1,76 @@
 <?php
 session_start();
 
-//Formulario de Login
+//Acción formulario de login
 if (isset($_REQUEST["login"])) {
-    //Habría que validar en BBDD que el password sea correcto
 
-    //Grabamos en la sesión el email logueado
-    $_SESSION['usuario'] = $_REQUEST['email'];
+    //Se graba el mail en la sesión
+    $_SESSION["usuario"] = $_REQUEST["correo"];
 
-    //Meter en la sesión una tabla ficticia de clientes y otra de incidencias
-    $_SESSION['clientes'] = array(
-        array("nombre" => "Manuel Pérez", "dni" => "23492983-A", "email" => "manper@gmail.com"),
-        array("nombre" => "Sonia Damaso", "dni" => "33444583-Z", "email" => "sondam@gmail.com"),
-        array("nombre" => "Javier Saez", "dni" => "45457895-B", "email" => "javsae@gmail.com"),
+    //Tabla de proyectos
+    $_SESSION["proyectos"] = array(
+        array(
+            "id" => "10001",
+            "nombre" => "Practica 1 Servidor",
+            "fechaInicio" => "15/10/2025",
+            "fechaFinPrevista" => "25/10/2025",
+            "diasTranscurridos" => 3,
+            "porcentajeCompletado" => "15%",
+            "importancia" => 5
+        ),
+
+        array(
+            "id" => "10002",
+            "nombre" => "Proyecto en grupo Cliente",
+            "fechaInicio" => "10/10/2025",
+            "fechaFinPrevista" => "20/10/2025",
+            "diasTranscurridos" => 8,
+            "porcentajeCompletado" => "78%",
+            "importancia" => 2
+        ),
+
+        array(
+            "id" => "10003",
+            "nombre" => "Hackaton Malaga",
+            "fechaInicio" => "29/10/2025",
+            "fechaFinPrevista" => "29/10/2025",
+            "diasTranscurridos" => 0,
+            "porcentajeCompletado" => "0%",
+            "importancia" => 4
+        ),
+
+        array(
+            "id" => "10004",
+            "nombre" => "Proyecto intermodular",
+            "fechaInicio" => "5/10/2025",
+            "fechaFinPrevista" => "25/11/2025",
+            "diasTranscurridos" => 13,
+            "porcentajeCompletado" => "5%",
+            "importancia" => 1
+        )
     );
-    $_SESSION['incidencias'] = array(
-        array("id" => "B-00001", "dni" => "23492983-A", "descr" => "Muy lento Internet"),
-        array("id" => "B-00002", "dni" => "33444583-Z", "descr" => "No enciende router"),
-        array("id" => "B-00003", "dni" => "45457895-B", "descr" => "Internet no funciona"),
-        array("id" => "B-00004", "dni" => "23492983-A", "descr" => "El porno no se ve"),
+
+    //Redirige a projects.php(ya hay sesión)
+    header("Location: projects.php");
+}
+
+//Formulario nuevo proyecto (desde modal)
+if (isset($_REQUEST["nuevoProyecto"])) {
+    $proyecto = array(
+        "id" => $_REQUEST['id'],
+        "nombre" => $_REQUEST['nombre'],
+        "fechaInicio" => $_REQUEST['fechaInicio'],
+        "fechaFinPrevista" => $_REQUEST["fechaFinPrevista"],
+        "diasTranscurridos" => $_REQUEST['diasTranscurridos'],
+        "porcentajeCompletado" => $_REQUEST['porcentajeCompletado'],
+        "importancia" => $_REQUEST['importancia']
     );
-
-    header("Location: clientes.php");
+    array_push($_SESSION['proyectos'], $proyecto);
+    header("Location: proyectos.php");
 }
 
-//Formulario de nuevo cliente
-if (isset($_REQUEST["nuevoCliente"])) {
-    $cliente = array("nombre" => $_REQUEST["nombre"], "dni" => $_REQUEST["dni"],  "email" =>  $_REQUEST["email"]);
-    array_push($_SESSION['clientes'], $cliente);
-    header("Location: clientes.php");
-}
-
-//Formulario de eliminar todos los clientes
-if (isset($_REQUEST["eliminarClientes"])) {
-    $_SESSION['clientes'] = array();
-    header("Location: clientes.php");
-}
-
-//Formulario de nueva incidencia
-if (isset($_REQUEST["nuevaIncidencia"])) {
-    $incidencia = array("id" => $_REQUEST["id"], "dni" => $_REQUEST["dni"], "descr" => $_REQUEST["descr"]);
-    array_push($_SESSION['incidencias'], $incidencia);
-    header("Location: incidencias.php");
-}
-
-//Formulario de eliminar todas las incidencias
-if (isset($_REQUEST["eliminarIncidencias"])) {
-    $_SESSION['incidencias'] = array();
-    header("Location: incidencias.php");
-}
-
-
-//Acciones por URL - GET
-if (isset($_REQUEST['accion'])) {
-    switch ($_REQUEST['accion']) {
-        //Cerrar sesión y redirigir a login.php
-        case 'cerrarsesion':
-            session_destroy();
-            header("Location: login.php");
-            break;
-        //Eliminar cliente
-        case 'delCliente':
-            //Eliminamos la posición indicada del array
-            $posicion = $_REQUEST['posicion'];
-            unset($_SESSION['clientes'][$posicion]);
-            $_SESSION['clientes'] = array_values($_SESSION['clientes']); //Regenerar índices y no dejar huecos
-
-            header("Location: clientes.php");
-            break;
-        //Eliminar incidencia
-        case 'delIncidencia':
-            //Eliminamos la posición indicada del array
-            $posicion = $_REQUEST['posicion'];
-            unset($_SESSION['incidencias'][$posicion]);
-            $_SESSION['incidencias'] = array_values($_SESSION['incidencias']); //Regenerar índices y no dejar huecos
-
-            header("Location: incidencias.php");
-            break;
-        //Ver incidencia en detalle
-        case 'verIncidencia':
-            $idIncidencia = $_REQUEST['id'];
-            //Buscamos la incidencia por su ID en la sesión
-            foreach ($_SESSION['incidencias'] as $incidencia) {
-                if (strcmp($incidencia['id'], $idIncidencia) == 0) {
-                    $dni = $incidencia['dni'];
-                    $descr = $incidencia['descr'];
-                }
-            }
-
-            header("Location: verIncidencia.php?id=" . $idIncidencia . "&dni=" . $dni . "&descr=" . $descr);
-
-            break;
-
-        //Ver cliente en detalle
-        case 'verCliente':
-            $dniCliente = $_REQUEST['dni'];
-            //Buscamos el cliente por dni en la sesión
-            foreach ($_SESSION['clientes'] as $cliente) {
-                if (strcmp($cliente['dni'], $dniCliente) == 0) {
-                    $nombre = $cliente['nombre'];
-                    $email = $cliente['email'];
-                }
-            }
-
-            header("Location: verCliente.php?dni=" . $dniCliente . "&nombre=" . $nombre . "&email=" . $email);
-
-            break;
-
-        //Generar informe de incidencias
-        case 'generarInformeIncidencias':
-            header("Location: informeIncidencias.php");
-            break;
-
-        default:
-            # code...
-            break;
-    }
+//Formulario eliminar todos los proyectos (desde modal)
+if (isset($_REQUEST["eliminarProyectos"])) {
+    $_SESSION["proyectos"] = array();
+    header("Location: proyectos.php");
 }
