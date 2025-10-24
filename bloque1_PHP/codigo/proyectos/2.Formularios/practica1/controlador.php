@@ -66,11 +66,31 @@ if (isset($_REQUEST["nuevoProyecto"])) {
         "importancia" => $_REQUEST['importancia']
     );
     array_push($_SESSION['proyectos'], $proyecto);
-    header("Location: proyectos.php");
+    header("Location: projects.php");
 }
 
 //Formulario eliminar todos los proyectos (desde modal)
 if (isset($_REQUEST["eliminarProyectos"])) {
     $_SESSION["proyectos"] = array();
-    header("Location: proyectos.php");
+    header("Location: projects.php");
+}
+
+//Acciones por URL - GET
+if (isset($_REQUEST["accion"])) {
+
+    switch ($_REQUEST["accion"]) {
+        //Cerrar sesión y redirigir a login.php
+        case 'cerrarsesion':
+            session_destroy();
+            header("Location: login.php");
+            break;
+        case 'delproyecto':
+            $posicion = $_REQUEST['posicion'];
+            unset($_SESSION['proyectos'][$posicion]);
+            //Regenerar indices y no dejar huecos
+            $_SESSION['proyectos'] = array_values($_SESSION['proyectos']);
+
+            header("Location: projects.php");
+            break;
+    }
 }

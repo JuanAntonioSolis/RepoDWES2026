@@ -49,28 +49,29 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!--Modal eliminar todos los proyectos-->
-    <div class="modal fade" id="eliminarProyectos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar proyectos</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+<!--Modal eliminar todos los proyectos-->
+<div class="modal fade" id="eliminarProyectos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar proyectos</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-                    <form action="controlador.php" method="POST" id="fec">
-                        <div class="form-group">
-                            <label class="form-label">¿Estás seguro de borrar todos los proyectos?</label>
-                        </div>
-                    </form>
+                <form action="controlador.php" method="POST" id="fec">
+                    <div class="form-group">
+                        <label class="form-label">¿Estás seguro de borrar todos los proyectos?</label>
+                    </div>
+                </form>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <button type="submit" class="btn btn-primary" name="eliminarProyectos" form="fec">Sí</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-primary" name="eliminarProyectos" form="fec">Sí</button>
             </div>
         </div>
     </div>
+</div>
