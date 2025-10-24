@@ -92,5 +92,28 @@ if (isset($_REQUEST["accion"])) {
 
             header("Location: projects.php");
             break;
+        case 'verproyecto':
+            $idProyecto = $_REQUEST['id'];
+            foreach($_SESSION['proyectos'] as $proyecto){
+                if (strcmp($proyecto['id'],$idProyecto) == 0){
+                    $id = $proyecto['id'];
+                    $nombre = $proyecto['nombre'];
+                    $fechaInicio = $proyecto['fechaInicio'];
+                    $fechaFinPrevista = $proyecto['fechaFinPrevista'];
+                    $diasTranscurridos = $proyecto['diasTranscurridos'];
+                    $porcentajeCompletado = $proyecto['porcentajeCompletado'];
+                    $importancia = $proyecto['importancia'];
+                } 
+            }
+
+            header("Location: viewProject.php?id= " . $id . 
+            "&nombre=" . $nombre . 
+            "&fechaInicio=" . $fechaInicio . 
+            "&fechaFinPrevista=" . $fechaFinPrevista . 
+            "&diasTranscurridos=" . $diasTranscurridos .
+            "&porcentajeCompletado=" . $porcentajeCompletado . 
+            "&importancia=" . $importancia);
+            
+            break;
     }
 }
