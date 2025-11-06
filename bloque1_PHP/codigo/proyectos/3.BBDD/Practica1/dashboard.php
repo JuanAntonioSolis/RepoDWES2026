@@ -13,7 +13,7 @@ if (!isset($_SESSION["usuario"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DWES App - Projects</title>
+    <title>DWES App - Dashboard</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
 </head>
 
@@ -33,7 +33,7 @@ if (!isset($_SESSION["usuario"])) {
             <button type="button" class="btn btn-warning btn-sm mb-2" data-bs-toggle="modal"
                 data-bs-target="#eliminarProyectos">
                 Eliminar todos
-            </button>
+            </button>                       
 
             <div class="card shadow mb-4">
                 <div class="card-body">
