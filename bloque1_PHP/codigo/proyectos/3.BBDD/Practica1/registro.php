@@ -20,7 +20,7 @@
         ?>
 
 
-        <form action="controlador.php" method="POST">
+        <form action="controlador.php?accion=registro" method="POST">
             <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">¡Regístrate!</h1>
             </div>
@@ -41,7 +41,7 @@
             
 
             <div class="text-center">
-                <button type="submit" class="btn btn-primary" name="registro">Registro</button>
+                <button type="submit" class="btn btn-primary">Registro</button>
             </div>
         </form>
     </div>

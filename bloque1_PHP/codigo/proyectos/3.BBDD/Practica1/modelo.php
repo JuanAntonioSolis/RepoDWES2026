@@ -1,7 +1,9 @@
 <?php
 
+//CONEXIÓN A LA BASE DE DATOS
 function conexionDB(){
 
+    
     try{
         //Data Source Name, se especifica tipo de base de datos (mysql).
         //Host: mariad
@@ -9,37 +11,52 @@ function conexionDB(){
         //Nombre de la base de datos: gestion_incidencias
         $dsn = "mysql:host=mariadb:3306;dbname=gestion_incidencias";
 
-        $dbh = new PDO($dsn,"usuario","password");
-        $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        //Usuario y contraseña de la base de datos. Usuario: usuario / Contraseña: usuario
+        $conexion = new PDO($dsn,"usuario","usuario");
+        $conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $ex){
         echo $ex->getMessage();
     }
 
-    return $dbh;
+    return $conexion;
 }
 
-//Insertar técnico
-function insertTecnico($nombre, $email, $password,$fecha_registro){
+//REGISTRO DE UN TÉCNICO
+/**
+ * Inserta un técnico en BBDD
+ * Con getPassword() comprueba que el mail no está ya en BBDD
+ * @param mixed $email
+ * @param mixed $nombre
+ * @param mixed $password
+ * @return bool 
+ * Devuelve True si se inserta el técnico, de lo contrario devuelve false.
+ */
+function insertTecnico($email, $nombre, $password){
+
     $conexion = conexionDB();
 
-    //Comprobar que mail no está en BBDD
     $existe = getPassword($email);
+
     if($existe != null){
         return false;
     }
 
-    $stmt = $conexion->prepare(("INSERT INTO tecnicos (nombre,email,password,fecha_registro) VALUES (:nombre,:email,:password,:fecha_registro)"));
-    $stmt->bindParam(":nombre", $nombre);
-    $stmt->bindParam(":email", $email);
-    $stmt->bindParam(":password", $password);
-    $stmt->bindParam(":fecha_registro", $fecha_registro);
+    $stmt = $conexion->prepare("INSERT INTO tecnicos (email, nombre, password) VALUES (:email, :nombre, :password)");
+    $stmt->bindParam(":email",$email);
+    $stmt->bindParam(":nombre",$nombre);
+    $stmt->bindParam(":password",$password);
     $stmt->execute();
-    
-    return true;
 
+    return true;
+    
 }
 
-//Autenticación técnico
+/**
+ * Saca la contraseña de un técnico por $email
+ * @param mixed $email
+ * Devuelve la contraseña si encuentra el usuario, de lo contrario si el mail
+ * no está registrado, devuelve null.
+ */
 function getPassword($email){
     $conexion = conexionDB();
 
@@ -48,9 +65,15 @@ function getPassword($email){
     $stmt->execute();
 
     $usuario = $stmt->fetch();
-    if ($usuario == false){ //Email no registrado
+    if ($usuario == false){ //Email no registradoSs
         return null;
     } else { //Email registrado, devuelve password hash
         return $usuario["password"];
     }
+}
+
+
+//LOGIN
+function validarTecnico($email, $password){
+
 }

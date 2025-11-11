@@ -2,9 +2,11 @@
 
 session_start();
 //Si la sesión no está iniciada, redirige a login.php
+
 if (!isset($_SESSION["usuario"])) {
     header("Location: login.php");
 }
+
 ?>
 
 <!DOCTYPE html>
