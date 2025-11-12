@@ -75,5 +75,18 @@ function getPassword($email){
 
 //LOGIN
 function validarTecnico($email, $password){
+    $conexion = conexionDB();
+
+    $stmt = $conexion->prepare("SELECT * FROM tecnicos WHERE email=:email");
+    $stmt-> bindParam(":email",$email);
+    $stmt->execute();
+
+    $usuario = $stmt->fetch();
+    if ($usuario == false){ //Email no registradoSs
+        return null;
+    } else { //Email registrado, devuelve password hash
+        return $usuario["password"];
+    }
+
 
 }
