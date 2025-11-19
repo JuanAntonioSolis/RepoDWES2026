@@ -101,7 +101,7 @@ function validarTecnico($email, $password){
 
 }
 
-function obtenerIncidenciasPorTecnico($id_tecnico){
+function obtenerIncidenciasPorTecnico($id_tecnico,$estado,$prioridad,$tipo){
 
     $conexion = conexionDB();
 
@@ -110,7 +110,25 @@ function obtenerIncidenciasPorTecnico($id_tecnico){
     }
     
     $stmt = $conexion->prepare("SELECT * FROM incidencias WHERE id_tecnico = :id_tecnico");
+
     $stmt->bindParam(":id_tecnico", $id_tecnico);
+
+
+    if(!empty($estado)){
+        $stmt .= "AND estado = :estado";
+        $stmt->bindParam(":estado",$estado);
+    }
+
+    if(!empty($tipo)){
+        $conexion .= "AND tipo = :tipo";
+        $stmt->bindParam(":tipo",$tipo);
+    }
+    
+    if(!empty($prioridad)){
+        $conexion .= "AND prioridad = :prioridad";
+        $stmt->bindParam(":prioridad",$prioridad);
+    }
+    
     $stmt->execute();
 
     $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
