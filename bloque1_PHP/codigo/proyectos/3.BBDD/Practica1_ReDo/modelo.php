@@ -78,21 +78,22 @@ function getPassword($email)
 
 //LOGIN
 
-function validarTecnico($email, $password){
+function validarTecnico($email, $password)
+{
     $conexion = conexionDB();
 
-    if($conexion == null){
+    if ($conexion == null) {
         return false;
     }
 
     $stmt = $conexion->prepare("SELECT * FROM tecnicos WHERE email = :email");
-    $stmt->bindParam(":email",$email);
+    $stmt->bindParam(":email", $email);
     $stmt->execute();
 
     $tecnico = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if($tecnico){
-        if(password_verify($password,$tecnico["password"])){
+    if ($tecnico) {
+        if (password_verify($password, $tecnico["password"])) {
             return $tecnico;
         }
     }
@@ -101,41 +102,60 @@ function validarTecnico($email, $password){
 
 }
 
-function obtenerIncidenciasPorTecnico($id_tecnico,$estado,$prioridad,$tipo){
+function buscarIncidencias($id_tecnico,$termino){
 
     $conexion = conexionDB();
 
-    if($conexion == null){
+    $stmt = $conexion->prepare("SELECT * from incidencias WHERE id_tecnico = :id_tecnico AND (titulo LIKE :termino OR descripcion LIKE :termino OR tipo LIKE :termino");
+    $stmt->bindParam(":id_tecnico", $id_tecnico);
+    $stmt->bindParam(":titulo", $termino);
+    $stmt->bindParam(":descripcion", $termino);
+    $stmt->bindParam(":tipo", $termino);
+
+    $stmt->execute();
+
+    $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $incidencias;
+    
+}
+
+function obtenerIncidenciasPorTecnico($id_tecnico, $estado, $tipo, $prioridad)
+{
+
+    $conexion = conexionDB();
+
+    if ($conexion == null) {
         return false;
     }
-    
-    $stmt = $conexion->prepare("SELECT * FROM incidencias WHERE id_tecnico = :id_tecnico");
 
-    $stmt->bindParam(":id_tecnico", $id_tecnico);
+    $sql = "SELECT * FROM incidencias WHERE id_tecnico = :id_tecnico";
+
+    $params = [":id_tecnico" => $id_tecnico];
 
 
-    if(!empty($estado)){
-        $stmt .= "AND estado = :estado";
-        $stmt->bindParam(":estado",$estado);
+    if (!empty($estado)) {
+        $sql .= " AND estado = :estado";
+        $params[":estado"] = $estado;
     }
 
-    if(!empty($tipo)){
-        $conexion .= "AND tipo = :tipo";
-        $stmt->bindParam(":tipo",$tipo);
+    if (!empty($tipo)) {
+        $sql .= " AND tipo = :tipo";
+        $params[":tipo"] = $tipo;
     }
-    
-    if(!empty($prioridad)){
-        $conexion .= "AND prioridad = :prioridad";
-        $stmt->bindParam(":prioridad",$prioridad);
+
+    if (!empty($prioridad)) {
+        $sql .= " AND prioridad = :prioridad";
+        $params[":prioridad"] = $prioridad;
     }
-    
-    $stmt->execute();
+
+    $stmt = $conexion->prepare($sql);
+
+    $stmt->execute($params);
+
 
     $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $incidencias;
 
 }
-
-
-

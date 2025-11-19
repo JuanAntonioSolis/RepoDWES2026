@@ -30,8 +30,14 @@ if (!isset($_SESSION["usuario"])) {
     $filtroEstado = $_REQUEST['estado'] ?? null;
     $filtroTipo = $_REQUEST['tipo'] ?? null;
     $filtroPrioridad = $_REQUEST['prioridad'] ?? null;
+    $busqueda = $_REQUEST['busqueda'] ?? '';
 
-    $incidencias = obtenerIncidenciasPorTecnico($idLogeado, $filtroEstado, $filtroTipo, $filtroPrioridad);
+    if (!empty ($busqueda)){
+        $incidencias = buscarIncidencias($idLogeado,$busqueda);
+    } else{
+        $incidencias = obtenerIncidenciasPorTecnico($idLogeado, $filtroEstado, $filtroTipo, $filtroPrioridad);
+    }
+    
     ?>
 
     <div class="container">
@@ -45,6 +51,17 @@ if (!isset($_SESSION["usuario"])) {
                 </div>
                 <div class="card-body">
                     <form action="dashboard.php">
+                        <div>
+                            <nav class="navbar">
+                                <div class="container-fluid d-flex justify-content-center">
+                                    <form class="d-flex" role="search">
+                                        <input class="form-control me-2" type="search" placeholder="Búsqueda por título, descripción o tipo"
+                                            aria-label="Search" />
+                                        <button class="btn btn-outline-dark mt-2" type="submit">Buscar</button>
+                                    </form>
+                                </div>
+                            </nav>
+                        </div>
                         <div>
                             <label for="estado">Estado:</label>
                             <select name="estado" id="estado" class="form-select">
@@ -86,6 +103,7 @@ if (!isset($_SESSION["usuario"])) {
                                 </option>
                             </select>
                         </div>
+
 
                         <div class="d-flex justify-content-center gap-5 mt-4">
                             <button type="submit" class="btn btn-primary ">Filtrar</button>
