@@ -102,7 +102,8 @@ function validarTecnico($email, $password)
 
 }
 
-function buscarIncidencias($id_tecnico,$termino){
+function buscarIncidencias($id_tecnico, $termino)
+{
 
     $conexion = conexionDB();
 
@@ -117,9 +118,18 @@ function buscarIncidencias($id_tecnico,$termino){
     $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $incidencias;
-    
+
 }
 
+/**
+ * Obtener incidencias por técnico y filtros aplicados
+ * @param mixed $id_tecnico
+ * @param mixed $estado
+ * @param mixed $tipo
+ * @param mixed $prioridad
+ * @return array|bool
+ * Devuelve la incidencia del tecnico logeado + los filtros aplicados en el dashboard
+ */
 function obtenerIncidenciasPorTecnico($id_tecnico, $estado, $tipo, $prioridad)
 {
 
@@ -158,4 +168,31 @@ function obtenerIncidenciasPorTecnico($id_tecnico, $estado, $tipo, $prioridad)
 
     return $incidencias;
 
+}
+
+function crearIncidencia($titulo, $descripcion, $tipo, $prioridad, $estado, $id_tecnico, $fecha_creacion)
+{
+    $conexion = conexionDB();
+
+    $stmt = $conexion->prepare("INSERT INTO incidencias (titulo, descripcion, tipo, 
+    estado, prioridad, id_tecnico,fecha_creacion) VALUES (:titulo, :descripcion, :tipo, :estado, :prioridad, :id_tecnico, :fecha_creacion)");
+    $stmt->bindValue(':titulo', $titulo);
+    $stmt->bindValue(':descripcion', $descripcion);
+    $stmt->bindValue(':tipo', $tipo);
+    $stmt->bindValue(':prioridad', $prioridad);
+    $stmt->bindValue(':estado', $estado);
+    $stmt->bindValue(':id_tecnico', $id_tecnico);
+    $stmt->bindValue(':fecha_creacion', $fecha_creacion);
+
+    $stmt->execute();
+}
+
+function eliminarIncidencia($id_incidencia){
+    $conexion = conexionDB();
+
+    $stmt = $conexion->prepare("DELETE FROM incidencias WHERE id_incidencia=:id_incidencia");
+    $stmt->bindParam(":id_incidencia",$id_incidencia);
+
+    $stmt->execute();
+    
 }

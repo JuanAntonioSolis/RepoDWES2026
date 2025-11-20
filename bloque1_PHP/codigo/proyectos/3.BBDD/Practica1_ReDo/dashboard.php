@@ -30,14 +30,12 @@ if (!isset($_SESSION["usuario"])) {
     $filtroEstado = $_REQUEST['estado'] ?? null;
     $filtroTipo = $_REQUEST['tipo'] ?? null;
     $filtroPrioridad = $_REQUEST['prioridad'] ?? null;
-    $busqueda = $_REQUEST['busqueda'] ?? '';
-
-    if (!empty ($busqueda)){
-        $incidencias = buscarIncidencias($idLogeado,$busqueda);
-    } else{
-        $incidencias = obtenerIncidenciasPorTecnico($idLogeado, $filtroEstado, $filtroTipo, $filtroPrioridad);
-    }
     
+
+
+    $incidencias = obtenerIncidenciasPorTecnico($idLogeado, $filtroEstado, $filtroTipo, $filtroPrioridad);
+
+
     ?>
 
     <div class="container">
@@ -50,18 +48,7 @@ if (!isset($_SESSION["usuario"])) {
                     Filtrado
                 </div>
                 <div class="card-body">
-                    <form action="dashboard.php">
-                        <div>
-                            <nav class="navbar">
-                                <div class="container-fluid d-flex justify-content-center">
-                                    <form class="d-flex" role="search">
-                                        <input class="form-control me-2" type="search" placeholder="Búsqueda por título, descripción o tipo"
-                                            aria-label="Search" />
-                                        <button class="btn btn-outline-dark mt-2" type="submit">Buscar</button>
-                                    </form>
-                                </div>
-                            </nav>
-                        </div>
+                    <form action="controlador.php?accion=listar" method="POST">
                         <div>
                             <label for="estado">Estado:</label>
                             <select name="estado" id="estado" class="form-select">
@@ -114,11 +101,11 @@ if (!isset($_SESSION["usuario"])) {
                 </div>
                 <div class="d-flex justify-content-center gap-5 card-footer">
                     <button type="button" class="btn btn-primary btn-sm mb-2 col-2 mt-2" data-bs-toggle="modal"
-                        data-bs-target="#nuevoProyecto">
+                        data-bs-target="#crear">
                         Añadir Proyecto
                     </button>
                     <button type="button" class="btn btn-warning btn-sm mb-2 col-2 mt-2" data-bs-toggle="modal"
-                        data-bs-target="#eliminarProyectos">
+                        data-bs-target="#eliminarTodas">
                         Eliminar todos
                     </button>
 
@@ -153,7 +140,7 @@ if (!isset($_SESSION["usuario"])) {
 
                                     echo "<td class='px-4'>";
                                     echo "<a class=' btn btn-success ' >Ver</a>";
-                                    echo "<a class=' btn btn-danger mx-3' >Eliminar</a>";
+                                    echo "<button type='button' class=' btn btn-danger mx-3' data-bs-toggle='modal' data-bs-target='#eliminarIncidencia&id_incidencia=" . $incidencia['id_incidencia']." ' >Eliminar</a>";
                                     echo "</td>";
 
                                     echo "</tr>";
@@ -171,7 +158,9 @@ if (!isset($_SESSION["usuario"])) {
     </div>
 
     <!--Lib con modales-->
-    <?php #include("./lib.php"); ?>
+    <?php include("lib.php"); ?>
+
+    
 
 
     <!--Bootstrap-->

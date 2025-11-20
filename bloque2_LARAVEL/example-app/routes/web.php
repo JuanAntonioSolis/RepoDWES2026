@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\IncidenciaController;
+use App\Http\Controllers\TecnicoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+//Rutas para incidencias
 Route::prefix('incidencias')->group(function(){
     //Pintar todas las incidencias
     Route::get('', [IncidenciaController::class, 'index'])->name('incidencias.index');
@@ -20,5 +22,8 @@ Route::prefix('incidencias')->group(function(){
     //Ver incidencia
     Route::get('/show/{id}', [IncidenciaController::class, 'show'])->name('incidencias.show');
 });
+
+//Rutas para técnicos
+Route::resource('tecnicos', TecnicoController::class)->names('tecnicos');
 
 
