@@ -14,8 +14,9 @@
                         <label for="floatingInput">Título</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <label for="floatingInput">Descripción</label>
+                        
                         <textarea name="descripcion" id="descripcion" class="form-control" rows="3"></textarea>
+                        <label for="floatingInput">Descripción</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="tipo" placeholder="Hardware,Software, Red, Otros">
@@ -46,7 +47,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="controlador.php?accion=eliminarIncidencia" method="POST" id="fei">
+                <form action='controlador.php?accion=eliminarIncidencia' method="POST" id="fei">
 
                     <p>¿Seguro que quieres eliminar esta incidencia?</p>
 

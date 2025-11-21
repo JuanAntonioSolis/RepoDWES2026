@@ -9,7 +9,7 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="./projects.php" class="nav-link px-2 text-white">Proyectos</a></li>
+                <li><a href="./projects.php" class="nav-link px-2 text-white">Incidencias</a></li>
             </ul>
 
             <div class="dropdown text-end">

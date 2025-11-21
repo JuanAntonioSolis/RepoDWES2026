@@ -41,7 +41,7 @@ if (!isset($_SESSION["usuario"])) {
     <div class="container">
         <main>
             <!-- Cabecera página-->
-            <h1 class="h3 mb-2 text-gray-800 text-center mt-5">Proyectos</h1>
+            <h1 class="h3 mb-2 text-gray-800 text-center mt-5">Incidencias</h1>
 
             <div class="card">
                 <div class="card-header bg-dark text-white">
@@ -100,14 +100,11 @@ if (!isset($_SESSION["usuario"])) {
 
                 </div>
                 <div class="d-flex justify-content-center gap-5 card-footer">
-                    <button type="button" class="btn btn-primary btn-sm mb-2 col-2 mt-2" data-bs-toggle="modal"
-                        data-bs-target="#crear">
-                        Añadir Proyecto
-                    </button>
                     <button type="button" class="btn btn-warning btn-sm mb-2 col-2 mt-2" data-bs-toggle="modal"
-                        data-bs-target="#eliminarTodas">
-                        Eliminar todos
-                    </button>
+                        data-bs-target="#crear">
+                        Añadir Incidencia   
+                    </button>           
+                    
 
                 </div>
             </div>
@@ -140,7 +137,9 @@ if (!isset($_SESSION["usuario"])) {
 
                                     echo "<td class='px-4'>";
                                     echo "<a class=' btn btn-success ' >Ver</a>";
-                                    echo "<button type='button' class=' btn btn-danger mx-3' data-bs-toggle='modal' data-bs-target='#eliminarIncidencia&id_incidencia=" . $incidencia['id_incidencia']." ' >Eliminar</a>";
+                                    echo "<a class='btn btn-danger mx-3' 
+                                    data-bs-toggle='modal' data-bs-target='#eliminarIncidencia' 
+                                    data-id='" .$incidencia['id_incidencia'] ."'> Eliminar</a>";
                                     echo "</td>";
 
                                     echo "</tr>";

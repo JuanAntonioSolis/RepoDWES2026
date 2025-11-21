@@ -60,6 +60,7 @@ switch ($accion) {
 
         $incidencias = obtenerIncidenciasPorTecnico($idLogeado, $filtroEstado, $filtroTipo, $filtroPrioridad);
 
+        include "dashboard.php";
         break;
 
     case 'crear':
