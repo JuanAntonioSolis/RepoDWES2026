@@ -36,7 +36,15 @@ class IncidenciaController extends Controller
         $incidencia->save();
         */
 
+        //Crear incidencia, nos da el id creado
         $incidencia = Incidencia::create($request->all());
+
+        //Almacenar la imagen con el id de la incidencia y nos devuelve la ruta completa
+        $path = $request->imagen->storeAs('incidencias',"incidencia_".$incidencia->id.".jpg");
+
+        //Actualizamos la incidencia con el path que me ha renerado la imagen.
+        $incidencia -> imagen = $path;
+        $incidencia->save();
 
         //Ver incidencia en detalle
         return redirect()->route('incidencias.show', $incidencia->id);

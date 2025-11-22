@@ -66,7 +66,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" id="nuevaIncidenciaForm" action="{{route("incidencias.store")}}">
+                <form method="POST" id="nuevaIncidenciaForm" action="{{route("incidencias.store")}}"
+                      enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label">Latitud</label>
@@ -87,6 +88,10 @@
                     <div class="mb-3">
                         <label class="form-label">Descripcion</label>
                         <textarea name="descripcion" class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Imagen</label>
+                        <input type="file" name="imagen" class="form-control">
                     </div>
 
 

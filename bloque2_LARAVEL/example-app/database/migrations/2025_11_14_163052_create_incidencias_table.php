@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('direccion',200);
             $table->text('descripcion');
             $table->enum('estado',['pendiente','en proceso','resuelta'])->default('pendiente');
+            $table->string('imagen',200)->nullable();
             $table->timestamps();
         });
     }
