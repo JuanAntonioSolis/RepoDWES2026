@@ -30,10 +30,12 @@ if (!isset($_SESSION["usuario"])) {
     $filtroEstado = $_REQUEST['estado'] ?? null;
     $filtroTipo = $_REQUEST['tipo'] ?? null;
     $filtroPrioridad = $_REQUEST['prioridad'] ?? null;
-    
 
-
-    $incidencias = obtenerIncidenciasPorTecnico($idLogeado, $filtroEstado, $filtroTipo, $filtroPrioridad);
+    if (!isset($incidencias)) {
+        require_once "modelo.php";
+        $idLogeado = $_SESSION["idUsuario"];
+        $incidencias = obtenerIncidenciasPorTecnico($idLogeado, "", "", "");
+    }
 
 
     ?>
@@ -102,9 +104,9 @@ if (!isset($_SESSION["usuario"])) {
                 <div class="d-flex justify-content-center gap-5 card-footer">
                     <button type="button" class="btn btn-warning btn-sm mb-2 col-2 mt-2" data-bs-toggle="modal"
                         data-bs-target="#crear">
-                        Añadir Incidencia   
-                    </button>           
-                    
+                        Añadir Incidencia
+                    </button>
+
 
                 </div>
             </div>
@@ -139,7 +141,7 @@ if (!isset($_SESSION["usuario"])) {
                                     echo "<a class=' btn btn-success ' >Ver</a>";
                                     echo "<a class='btn btn-danger mx-3' 
                                     data-bs-toggle='modal' data-bs-target='#eliminarIncidencia' 
-                                    data-id='" .$incidencia['id_incidencia'] ."'> Eliminar</a>";
+                                    data-id='" . $incidencia['id_incidencia'] . "'> Eliminar</a>";
                                     echo "</td>";
 
                                     echo "</tr>";
@@ -159,7 +161,7 @@ if (!isset($_SESSION["usuario"])) {
     <!--Lib con modales-->
     <?php include("lib.php"); ?>
 
-    
+
 
 
     <!--Bootstrap-->
